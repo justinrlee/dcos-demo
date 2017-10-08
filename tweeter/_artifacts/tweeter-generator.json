@@ -1,0 +1,18 @@
+{
+    "cmd": "bin/tweet shakespeare-tweets.json tweeter.marathon.l4lb.thisdcos.directory:10000",
+    "container": {
+      "docker": {
+        "image": "mesosphere/tweeter"
+      },
+      "type": "DOCKER"
+    },
+    "cpus": 0.25,
+    "id": "tweeter-generator",
+    "instances": 1,
+    "labels": {
+      "DCOS_PACKAGE_VERSION": "0.1"
+    },
+    "mem": 256,
+    "portDefinitions": []
+  }
+  
