@@ -36,16 +36,3 @@ pools:
                 value: demo
               port:
                 name: demo-80
-        - name: zeppelin
-          protocol: HTTP
-          rewriteHttp:
-            path:
-              fromPath: /zeppelin/
-              toPath: /
-          servers:
-            - framework:
-                value: marathon
-              task:
-                value: zeppelin
-              port:
-                name: zeppelin-0
