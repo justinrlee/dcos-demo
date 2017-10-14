@@ -1,0 +1,43 @@
+---
+pools:
+  - name: demo
+    count: 1
+    haproxy:
+      frontends:
+        - bindPort: 80
+          protocol: HTTP
+          linkBackend:
+            defaultBackend: tweeter
+            map:
+              - pathBeg: /notes
+                backend: notes
+              - pathBeg: /zeppelin
+                backend: zeppelin
+      backends:
+        - name: tweeter
+          protocol: HTTP
+          servers:
+            - framework:
+                value: marathon
+              task:
+                value: tweeter
+              port:
+                name: tweeter-3000
+        - name: notes
+          protocol: HTTP
+          servers:
+            - framework:
+                value: marathon
+              task:
+                value: justin
+              port:
+                name: demo-80
+        - name: zeppelin
+          protocol: HTTP
+          servers:
+            - framework:
+                value: marathon
+              task:
+                value: host-httpd
+              port:
+                name: web

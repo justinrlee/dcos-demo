@@ -1,0 +1,14 @@
+{
+    "id": "{{tweeter-generator.name}}",
+    "cmd": "bin/tweet shakespeare-tweets.json {{tweeter-generator.tweeter-endpoint}}",
+    "cpus": {{tweeter-generator.cpus}},
+    "mem": {{tweeter-generator.mem}},
+    "instances": {{tweeter-generator.instances}},
+    "portDefinitions": [],
+    "container": {
+      "type": "DOCKER",
+      "docker": {
+        "image": "mesosphere/tweeter"
+      }
+    }
+  }

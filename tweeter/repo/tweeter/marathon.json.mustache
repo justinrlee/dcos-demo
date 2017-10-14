@@ -1,0 +1,41 @@
+{
+    "id": "{{tweeter.name}}",
+    "cmd": "until rake cassandra:setup; do sleep 5; done && rails server",
+    "cpus": {{tweeter.cpus}},
+    "mem": {{tweeter.mem}},
+    "instances": {{tweeter.instances}},
+    "container": {
+      "type": "DOCKER",
+      "docker": {
+        "image": "mesosphere/tweeter",
+        "network": "BRIDGE",
+        "portMappings": [
+          {
+            "containerPort": 3000,
+            "hostPort": 0,
+            "servicePort": {{tweeter.servicePort}},
+            "name": "{{tweeter.port-name}}",
+            "labels": {
+              "VIP_0": "/{{tweeter.name}}:{{tweeter.vip-port}}"
+            }
+          }
+        ]
+      }
+    },
+    "env": {
+      "RAILS_ENV": "production",
+      "CASSANDRA_HOSTS": "{{tweeter.cassandra-endpoint}}",
+      "KAFKA_BROKERS": "{{tweeter.kafka-endpoint}}:{{tweeter.kafka-port}}",
+      "SECRET_KEY_BASE": "{{tweeter.secret-key-base}}"
+    },
+    "healthChecks": [
+      {
+        "path": "/",
+        "protocol": "HTTP",
+        "portIndex": 0
+      }
+    ],
+    "labels": {
+      "HAPROXY_GROUP": "{{tweeter.haproxy-group}}"
+    }
+  }

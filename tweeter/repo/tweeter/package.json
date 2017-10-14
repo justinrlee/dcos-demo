@@ -1,0 +1,15 @@
+{
+    "packagingVersion": "4.0",
+    "name": "tweeter",
+    "version": "0.1",
+    "minDcosReleaseVersion": "1.9",
+    "scm": "https://github.com/mesosphere/tweeter",
+    "description": "Tweeter App",
+    "maintainer": "support@mesosphere.io",
+    "tags": ["demo", "tweeter"],
+    "preInstallNotes": "For demo purposes only",
+    "postInstallNotes": "Tweeter demo is deploying",
+    "postUninstallNotes": "N/A",
+    "releaseVersion": 0,
+    "licenses": []
+  }

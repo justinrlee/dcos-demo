@@ -8,10 +8,11 @@
         {
           "containerPort": 3000,
           "hostPort": 0,
+          "name": "tweeter-3000",
           "labels": {
             "VIP_0": "/tweeter:10000"
           },
-          "servicePort": 10000
+          "servicePort": 11000
         }
       ]
     },
