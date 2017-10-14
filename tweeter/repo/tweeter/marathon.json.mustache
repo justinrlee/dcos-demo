@@ -35,6 +35,14 @@
         "portIndex": 0
       }
     ],
+    {{#tweeter.unique}}
+    "constraints": [
+      [
+        "hostname",
+        "UNIQUE"
+      ]
+    ]
+    {{/tweeter.unique}}
     "labels": {
       "HAPROXY_GROUP": "{{tweeter.haproxy-group}}"
     }

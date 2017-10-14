@@ -9,8 +9,8 @@ pools:
           linkBackend:
             defaultBackend: tweeter
             map:
-              - pathBeg: /notes
-                backend: notes
+              - pathBeg: /demo
+                backend: demo
               - pathBeg: /zeppelin
                 backend: zeppelin
       backends:
@@ -23,21 +23,29 @@ pools:
                 value: tweeter
               port:
                 name: tweeter-3000
-        - name: notes
+        - name: demo
           protocol: HTTP
+          rewriteHttp:
+            path:
+              fromPath: /demo/
+              toPath: /
           servers:
             - framework:
                 value: marathon
               task:
-                value: justin
+                value: demo
               port:
                 name: demo-80
         - name: zeppelin
           protocol: HTTP
+          rewriteHttp:
+            path:
+              fromPath: /zeppelin/
+              toPath: /
           servers:
             - framework:
                 value: marathon
               task:
-                value: host-httpd
+                value: zeppelin
               port:
-                name: web
+                name: zeppelin-0

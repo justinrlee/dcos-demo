@@ -27,6 +27,12 @@
                     "type": "integer"
                 },
 
+                "unique": {
+                    "default": false,
+                    "description": "Add hostname:unique constraint",
+                    "type": "boolean"
+                },
+
                 "haproxy-group": {
                     "default": "external",
                     "description": "HAProxy group to use (for Marathon-LB)",

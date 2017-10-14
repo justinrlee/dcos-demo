@@ -1,17 +1,23 @@
 #!/bin/bash
 mkdir -p workspace
 mkdir -p packages
-for package in $PACKAGES; do
+if [[ -z ${PACKAGES} ]]; then
+    PACKAGES=$(ls repo/)
+fi
+
+rm packages/*
+
+for package in ${PACKAGES}; do
     echo "Building package for [${package}]..."
     
     echo "Encoding mustache"
-    base64 -w0 ${package}/marathon.json.mustache | jq -R '{v2AppMustacheTemplate: .}' > workspace/marathon.json
+    base64 -w0 repo/${package}/marathon.json.mustache | jq -R '{v2AppMustacheTemplate: .}' > workspace/marathon.json
 
     # echo Combine nested entries
-    jq -s '{resource: .[0], config: .[1], marathon: .[2] }' ${package}/resource.json ${package}/config.json workspace/marathon.json > workspace/base.json
+    jq -s '{resource: .[0], config: .[1], marathon: .[2] }' repo/${package}/resource.json repo/${package}/config.json workspace/marathon.json > workspace/base.json
 
     echo "Creating tweeter.json"
-    jq -s '.[0] * .[1]' ${package}/package.json workspace/base.json > packages/${package}.json
+    jq -s '.[0] * .[1]' repo/${package}/package.json workspace/base.json > packages/${package}.json
 
     echo "Cleaning up..."
     rm workspace/marathon.json
