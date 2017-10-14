@@ -11,8 +11,6 @@ pools:
             map:
               - pathBeg: /demo
                 backend: demo
-              - pathBeg: /zeppelin
-                backend: zeppelin
       backends:
         - name: tweeter
           protocol: HTTP
